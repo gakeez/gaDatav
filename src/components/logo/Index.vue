@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import { onMounted } from "vue";
+//import { onMounted } from "vue";
 export default {
   name: "gaLogo",
   props: {
@@ -25,12 +25,12 @@ export default {
     },
   },
   setup() {
-    onMounted(() => {
+    /* onMounted(() => {
       // 获取最长周长长度
       const path = document.getElementById("taobao-logo");
       const pathLen = path.getTotalLength();
       console.log(pathLen);
-    });
+    }); */
   },
 };
 </script>

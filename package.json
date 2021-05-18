@@ -12,8 +12,15 @@
   "dependencies": {
     "axios": "^0.21.1",
     "core-js": "^3.8.3",
+    "echarts": "^5.1.1",
+    "echarts-gl": "^2.0.4",
     "ga-datav-libs": "1.0.0",
+    "lodash": "^4.17.21",
+    "mockjs": "^1.1.0",
+    "uuid": "^3.4.0",
     "vue": "^3.0.11",
+    "vue-count-to2": "^1.0.4",
+    "vue-echarts": "*",
     "vue-router": "^4.0.3",
     "vuex": "^4.0.0"
   },
@@ -29,6 +36,7 @@
     "eslint": "^7.20.0",
     "eslint-plugin-vue": "^7.2.0",
     "jest": "^26.6.3",
+    "less-loader": "^9.0.0",
     "lint-staged": "^10.5.4",
     "sass": "^1.32.7",
     "sass-loader": "^11.0.1"

@@ -3,7 +3,7 @@
     <loading v-if="loading">
       <div class="loading-text">数据大屏加载中...</div>
     </loading>
-    <container :options="{ wideth: 3840, height: 2160 }" v-else>
+    <container :options="{ width: 3840, height: 2160 }" v-else>
       <div class="header">
         <top-header></top-header>
       </div>
@@ -17,28 +17,59 @@
               :growth-last-month="growthLastMonth"
             ></total-user>
           </div>
-          <!-- <div class="left2"></div>
-          <div class="left3"></div>
-          <div class="left4"></div>
-          <div class="left5"></div>
-          <div class="left6"></div> -->
+          <div class="left2">
+            <average-age :data="ageData" :avg-age="averageAge"></average-age>
+          </div>
+          <div class="left3">
+            <total-device :data="deviceData"></total-device>
+          </div>
+          <div class="left4">
+            <total-gender :data="genderData"></total-gender>
+          </div>
+          <div class="left5">
+            <total-rider :data="riderData" />
+          </div>
+          <div class="left6">
+            <hot-category :data="hotCategoryData"></hot-category>
+          </div>
         </div>
-        <!--<div class="right">
-          <div class="right-top1"></div>
-          <div class="right-top2"></div>
+        <div class="right">
+          <div class="right-top1">
+            <center-header :data="headerData"></center-header>
+          </div>
+          <div class="right-top2">
+            <transform-category
+              :data="['全部', '北京', '上海', '深圳', '杭州', '南京', '武汉']"
+            ></transform-category>
+          </div>
           <div class="right-bottom">
             <div class="right-left">
-              <div class="right-left1"></div>
-              <div class="right-left2"></div>
-              <div class="right-left3"></div>
-              <div class="right-left4"></div>
+              <div class="right-left1">
+                <order-map :data="orderMapData"></order-map>
+              </div>
+              <div class="right-left2">
+                <transform-category
+                  :data="['订单量', '销售额', '用户数', '退单量']"
+                  :color="['#4265a6', '#255cc2']"
+                ></transform-category>
+              </div>
+              <div class="right-left3">
+                <real-time-order :data="realTimeOrderData"></real-time-order>
+              </div>
+              <div class="right-left4">
+                <schedule-view></schedule-view>
+              </div>
             </div>
             <div class="right-right">
-              <div class="right-right1"></div>
-              <div class="right-right2"></div>
+              <div class="right-right1">
+                <sales-list :data="salesListData" />
+              </div>
+              <div class="right-right2">
+                <sales-Rank :data="salesRankData"></sales-Rank>
+              </div>
             </div>
           </div>
-        </div>-->
+        </div>
       </div>
     </container>
   </div>
@@ -51,6 +82,18 @@ import Container from "../components/container/Index";
 import Loading from "../components/loading/Index";
 import TopHeader from "../components/topHeader/Index";
 import TotalUser from "../components/totalUser/Index";
+import AverageAge from "../components/averageAge/Index";
+import TotalDevice from "../components/totalDevice/Index";
+import TotalGender from "../components/totalGender/Index";
+import TotalRider from "../components/totalRider/Index";
+import HotCategory from "../components/hotCategory/Index";
+import CenterHeader from "../components/centerHeader/Index";
+import TransformCategory from "../components/transformCategory/Index";
+import SalesList from "../components/salesList/Index";
+import OrderMap from "../components/orderMap/Index";
+import RealTimeOrder from "../components/realTimeOrder/Index";
+import ScheduleView from "../components/scheduleView/Index";
+import SalesRank from "../components/salesRank/Index";
 
 export default {
   name: "Home",
@@ -59,9 +102,22 @@ export default {
     Loading,
     TopHeader,
     TotalUser,
+    AverageAge,
+    TotalDevice,
+    TotalGender,
+    TotalRider,
+    HotCategory,
+    CenterHeader,
+    TransformCategory,
+    SalesList,
+    OrderMap,
+    RealTimeOrder,
+    ScheduleView,
+    SalesRank,
   },
+
   setup() {
-    const loading = ref(true);
+    const loading = ref(false);
 
     onMounted(() => {
       // 模拟异步加载数据
@@ -113,7 +169,6 @@ export default {
       flex: 1;
       display: flex;
       width: 100%;
-
       .left {
         flex: 0 0 860px;
         display: flex;
@@ -123,7 +178,6 @@ export default {
         height: 100%;
         padding-bottom: 20px;
         box-sizing: border-box;
-
         .left1 {
           height: 300px;
           background: grey;
@@ -160,7 +214,6 @@ export default {
         display: flex;
         flex-direction: column;
         margin-left: 10px;
-
         .right-top1 {
           width: 100%;
           height: 206px;
@@ -224,7 +277,7 @@ export default {
             .right-right2 {
               flex: 1;
               width: 100%;
-              margin-top: 20px;
+              margin-top: 12px;
               background: grey;
             }
           }

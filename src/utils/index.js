@@ -1,3 +1,5 @@
+export const apiBaseUrl = "https://apis.imooc.com";
+
 // 防抖方法
 export function debounce(delay, callback) {
   let task;

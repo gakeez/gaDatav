@@ -3,34 +3,32 @@
     <div class="title">用户总数</div>
     <div class="sub-title">User Total Count</div>
     <div class="total">
-      {{ todayUser }}
-      <!-- <count-to :start-val="startVal" :end-val="todayUser" :duration="1000" /> -->
+      <count-to :start-val="startVal" :end-val="todayUser" :duration="1000" />
     </div>
     <div class="percent-text">
       <span class="percent-text-1">
         每日增长率:
-        {{ growthLastDay }}
-        <!-- <count-to
+        <count-to
           :start-val="startPercent"
           :end-val="growthLastDay"
           :duration="1000"
           :decimals="2"
           suffix="%"
-        /> -->
+        />
       </span>
       <span class="percent-text-2">
         每月增长率:
-        {{ growthLastMonth }}
-        <!-- <count-to
+        <count-to
           :start-val="startPercent2"
           :end-val="growthLastMonth"
           :duration="1000"
           :decimals="2"
           suffix="%"
-        /> -->
+        />
       </span>
     </div>
     <div class="percent">
+      <!-- 动态宽度就能形成进度条动画 -->
       <div class="percent-inner-wrapper">
         <div class="percent-inner" :style="{ width: `${growthLastDay}%` }" />
       </div>
@@ -61,6 +59,7 @@ export default {
     const startVal = ref(0);
     const startPercent = ref(0);
     const startPercent2 = ref(0);
+    // 监听用户数，改变startVal
     watch(
       () => props.todayUser,
       (nextValue, prevValue) => {
@@ -143,7 +142,7 @@ export default {
       overflow: hidden;
       .percent-inner {
         height: 100%;
-        background: rgb(150, 150, 150);
+        background: #0099cc;
         transition: width 1s linear;
       }
     }

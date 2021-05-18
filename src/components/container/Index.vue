@@ -28,18 +28,6 @@ export default {
     const ready = ref(false);
     let context, dom, observer;
 
-    // 实例被挂载后调用
-    onMounted(async () => {
-      ready.value = false;
-      context = getCurrentInstance().ctx; // 获得当前实例
-      await initSize(); // 初始化屏幕参数。这个初始化必须是同步方法才能保证后续方法正常执行
-      updateSize(); // 更新尺寸
-      updateScale(); // 根据比例缩放
-      window.addEventListener("resize", debounce(100, onResize)); // 监听屏幕大小变化，然后onResize。这里使用防抖方法节省资源，缺点是有了100ms的间隔，动画不流畅。根据实际情况使用
-      initMutationObserver(); // 处理resize外，还有其他可能变更dom树，所以使用MutationObserver监听dom树变化
-      ready.value = true;
-    });
-
     // 初始化，获得宽高
     const initSize = () => {
       return new Promise((resolve) => {
@@ -63,7 +51,12 @@ export default {
             originalWidth.value = window.screen.width;
             originalHeight.value = window.screen.height;
           }
-          // console.log(width.value, height.value, originalWidth.value, originalHeight.value)
+          /* console.log(
+            width.value,
+            height.value,
+            originalWidth.value,
+            originalHeight.value
+          ); */
           resolve();
         });
       });
@@ -90,10 +83,12 @@ export default {
       const realWidth = width.value || originalWidth.value;
       const realHeight = height.value || originalHeight.value;
 
-      // console.log(currentWidth, currentHeight)
+      //console.log(currentWidth, currentHeight, realWidth, realHeight);
       // 计算压缩比
       const widthScale = currentWidth / realWidth;
       const heightScale = currentHeight / realHeight;
+
+      //console.log(widthScale, heightScale);
 
       // 缩放
       dom && (dom.style.transform = `scale(${widthScale}, ${heightScale})`);
@@ -132,6 +127,18 @@ export default {
         observer = null;
       }
     };
+
+    // 实例被挂载后调用
+    onMounted(async () => {
+      ready.value = false;
+      context = getCurrentInstance().ctx; // 获得当前实例
+      await initSize(); // 初始化屏幕参数。这个初始化必须是同步方法才能保证后续方法正常执行
+      updateSize(); // 更新尺寸
+      updateScale(); // 根据比例缩放
+      window.addEventListener("resize", debounce(100, onResize)); // 监听屏幕大小变化，然后onResize。这里使用防抖方法节省资源，缺点是有了100ms的间隔，动画不流畅。根据实际情况使用
+      initMutationObserver(); // 处理resize外，还有其他可能变更dom树，所以使用MutationObserver监听dom树变化
+      ready.value = true;
+    });
 
     // 销毁事件时，解绑
     onUnmounted(() => {
