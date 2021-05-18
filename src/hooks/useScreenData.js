@@ -1,29 +1,9 @@
 import { ref, onMounted, onUnmounted } from "vue";
 import { screenData, mapScatter } from "../api";
 
-const color = [
-  "rgb(116,166,49)",
-  "rgb(190,245,99)",
-  "rgb(202,252,137)",
-  "rgb(251,253,142)",
-];
+const color = ["#1c92e2", "#9acff3", "#00bfff", "#1e90ff"];
 
 export default function() {
-  /* const todayUser = ref(10000);
-  const growthLastDay = ref(10);
-  const growthLastMonth = ref(15);
-  const ageData = ref(ageMockData);
-  const averageAge = ref(0);
-  const deviceData = ref(deviceMockData);
-  const genderData = ref(genderMockData);
-  const riderData = ref(riderMockData);
-  const hotCategoryData = ref(hotCategoryMockData);
-  const headerData = ref(headerMockData);
-  const salesListData = ref(salesListMockData);
-  const orderMapData = ref(null);
-  const realTimeOrderData = ref(realTimeOrderMockData);
-  const scheduleViewData = ref(scheduleViewMockData);
-  const salesRankData = ref(salesRankMockData); */
   const todayUser = ref(0);
   const growthLastDay = ref(0);
   const growthLastMonth = ref(0);
@@ -110,40 +90,40 @@ export default function() {
             subTitle: "Today's Sales Amount",
             startVal: getKeyValues({ key: "headerData", index: 0 }),
             endVal: data.salesToday,
-            img: "https://www.youbaobao.xyz/datav-res/money.png",
+            icon: "renminbi",
           },
           {
             title: "今日订单量",
             subTitle: "Today's Total Orders",
             startVal: getKeyValues({ key: "headerData", index: 1 }),
             endVal: data.orderToday,
-            img: "https://www.youbaobao.xyz/datav-res/order.png",
+            icon: "dingdan",
           },
           {
             title: "今日交易用户数",
             subTitle: "Today's Payed Users",
             startVal: getKeyValues({ key: "headerData", index: 2 }),
             endVal: data.orderUser,
-            img: "https://www.youbaobao.xyz/datav-res/member.png",
+            icon: "maijiagouwuche",
           },
           {
             title: "今日新增用户数",
             subTitle: "Today's New Users",
             startVal: getKeyValues({ key: "headerData", index: 3 }),
             endVal: data.userToday,
-            img: "https://www.youbaobao.xyz/datav-res/follow.png",
+            icon: "user",
           },
         ],
         project: [
           {
             title: "转化率",
             value: `${data.covertRate}%`,
-            img: "https://www.youbaobao.xyz/datav-res/success.png",
+            icon: "rongzizijin",
           },
           {
             title: "退单率",
             value: `${data.returnRate}%`,
-            img: "https://www.youbaobao.xyz/datav-res/failed.png",
+            icon: "yuanchengchuantou",
           },
         ],
       };
@@ -160,14 +140,6 @@ export default function() {
 
       // 区域销售排行数据
       salesRankData.value = data.areaTop;
-
-      // 地图数据
-      //orderMapData.value = data.orderMap;
-      /* fetch("http://www.youbaobao.xyz/datav-res/datav/map.json")
-        .then((response) => response.json())
-        .then((data) => {
-          orderMapData.value = data;
-        }); */
     });
   };
 

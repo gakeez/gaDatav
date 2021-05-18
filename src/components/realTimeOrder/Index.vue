@@ -45,6 +45,7 @@ export default {
     const { ctx } = getCurrentInstance();
     let chart;
     const update = () => {
+      console.log(props.data.date);
       function createOption() {
         const option = {
           xAxis: {
