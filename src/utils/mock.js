@@ -1,5 +1,6 @@
 import Mock from "mockjs";
 import { apiBaseUrl } from "./index";
+const Random = Mock.Random;
 
 const screenMockData = {
   userToday: 1690419,
@@ -1081,7 +1082,7 @@ const screenMockData = {
       ],
     },
   ],
-  realTimeOrder: 1462,
+  realTimeOrder: 1433,
   growthLastDay: "69.04",
   growthLastMonth: "111.30",
 };
@@ -4265,8 +4266,43 @@ const orderMap = {
     },
   ],
 };
-
-Mock.mock(apiBaseUrl + "/screen/data", "get", screenMockData);
+/* 
+gender: [
+    {
+      key: "male",
+      value: 845204,
+    },
+    {
+      key: "female",
+      value: 845215,
+    },
+  ], */
+//Mock.mock(apiBaseUrl + "/screen/data", "get", screenMockData);
+Mock.mock(apiBaseUrl + "/screen/data", "get", () => {
+  (screenMockData.userToday = Random.integer(1000000, 2000000)),
+    (screenMockData.userLastDay = Random.integer(1000000, 2000000)),
+    (screenMockData.userLastMonth = Random.integer(500000, 1000000)),
+    (screenMockData.userGrowthLastDay = Random.integer(50, 100)),
+    (screenMockData.userGrowthLastMonth = Random.integer(70, 150)),
+    screenMockData.age.forEach((item) => {
+      item.value = Random.integer(100000, 900000);
+    }),
+    (screenMockData.averageAge = Random.float(20, 60, 0, 2)),
+    (screenMockData.totalDevices = Random.integer(1000000, 2000000)),
+    screenMockData.devices.forEach((item) => {
+      item.value = Random.integer(300000, 900000);
+    }),
+    screenMockData.gender.forEach((item) => {
+      item.value = Random.integer(500000, 900000);
+    }),
+    (screenMockData.salesToday = Random.integer(50000000, 80000000)),
+    (screenMockData.orderToday = Random.integer(3000000, 5000000)),
+    (screenMockData.orderUser = Random.integer(500000, 800000)),
+    (screenMockData.covertRate = Random.float(10, 30, 0, 2)),
+    (screenMockData.returnRate = Random.float(3, 10, 0, 2)),
+    (screenMockData.realTimeOrder = Random.integer(500, 1500));
+  return screenMockData;
+});
 Mock.mock(apiBaseUrl + "/screen/map/scatter", "get", orderMap);
 
 Mock.mock(apiBaseUrl + "/test", "get", {
