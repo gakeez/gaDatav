@@ -78,6 +78,7 @@
 <script>
 import { ref, onMounted } from "vue";
 import screenData from "../hooks/useScreenData";
+import { orderMap } from "../hooks/useScreenData";
 import Container from "../components/container/Index";
 import Loading from "../components/loading/Index";
 import TopHeader from "../components/topHeader/Index";
@@ -117,7 +118,8 @@ export default {
   },
 
   setup() {
-    const loading = ref(false);
+    const loading = ref(true);
+    const orderMapData = orderMap();
 
     onMounted(() => {
       // 模拟异步加载数据
@@ -129,6 +131,7 @@ export default {
     return {
       loading,
       ...screenData(),
+      orderMapData,
     };
   },
 };

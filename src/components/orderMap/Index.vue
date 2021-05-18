@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import { ref, nextTick, getCurrentInstance, watch } from "vue";
+import { ref, nextTick, getCurrentInstance, watch, onMounted } from "vue";
 import "echarts-gl";
 
 export default {
@@ -16,13 +16,13 @@ export default {
   },
   setup(props) {
     const { ctx } = getCurrentInstance();
-    //let chart;
+    let chart;
     const options = ref({});
 
     const ready = ref(false);
     /* eslint-disable */
     const genChart = (geoJson) => {
-      console.log("genChart ", JSON.stringify(geoJson));
+      //console.log("genChart ", JSON.stringify(geoJson));
       const geoGpsMap = {
         "1": [125.8154, 44.2584],
         "2": [125.8154, 44.2584],
@@ -758,9 +758,10 @@ export default {
           ],
         });
       }
-      ctx.echarts
-        .init(document.getElementById("order-map-chart"))
-        .setOption(optionXyMap01);
+      if (!chart) {
+        chart = ctx.echarts.init(document.getElementById("order-map-chart"));
+      }
+      chart.setOption(optionXyMap01);
     };
     const update = () => {
       ready.value = true;
@@ -770,11 +771,10 @@ export default {
       });
     };
 
-    /* onMounted(() => {
+    onMounted(() => {
       update();
-    }); */
+    });
 
-    // 异步获取的数据，所以用watch
     watch(
       () => props.data,
       () => {

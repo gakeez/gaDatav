@@ -71,7 +71,7 @@ export default {
         },
       ];
       listData.value = currentData;
-      console.log(currentData);
+      //console.log(currentData);
       function createOption() {
         const data = [];
         data[0] = Math.ceil(Math.random() * 100);

@@ -147,19 +147,12 @@ export default {
     watch(
       () => props.data,
       (newData) => {
+        //console.log(newData);
         update(newData);
       }
     );
 
     onMounted(() => {
-      /* nextTick(() => {
-        update(props.data);
-      }); */
-      /* setTimeout(() => {
-        update(props.data);
-      }, 2000); */
-
-      //console.log(document.getElementById("average-age-chart"));
       update(props.data);
     });
     return {
