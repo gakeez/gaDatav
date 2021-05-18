@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import { ref, getCurrentInstance, onMounted, onUnmounted, nextTick } from "vue";
+import { ref, onMounted, onUnmounted, nextTick } from "vue";
 import { debounce } from "../../utils/index";
 
 export default {
@@ -26,7 +26,8 @@ export default {
     const originalWidth = ref(0);
     const originalHeight = ref(0);
     const ready = ref(false);
-    let context, dom, observer;
+    //let context;
+    let dom, observer;
 
     // 初始化，获得宽高
     const initSize = () => {
@@ -34,7 +35,8 @@ export default {
         // 为防止初始化时有其他渲染更新造成冲突，所以使用nextTick延迟到渲染更新完后再执行
         nextTick(() => {
           // 获得目标dom
-          dom = context.$refs[refName];
+          dom = document.getElementById("container");
+          //dom = context.$refs[refName];
           // 获取大屏的真实尺寸
           if (props.options && props.options.width && props.options.height) {
             width.value = props.options.width;
@@ -131,7 +133,7 @@ export default {
     // 实例被挂载后调用
     onMounted(async () => {
       ready.value = false;
-      context = getCurrentInstance().ctx; // 获得当前实例
+      //context = getCurrentInstance().ctx; // 获得当前实例
       await initSize(); // 初始化屏幕参数。这个初始化必须是同步方法才能保证后续方法正常执行
       updateSize(); // 更新尺寸
       updateScale(); // 根据比例缩放
