@@ -50,7 +50,7 @@ export default {
     const refData = ref([]);
     const num = ref(0);
     const startNum = ref(0);
-    const { ctx } = getCurrentInstance();
+    const { proxy } = getCurrentInstance();
 
     const updateChart = () => {
       function createOption() {
@@ -79,7 +79,9 @@ export default {
       }
 
       if (!chart) {
-        chart = ctx.echarts.init(document.getElementById("total-device-chart"));
+        chart = proxy.echarts.init(
+          document.getElementById("total-device-chart")
+        );
       }
       chart.setOption(createOption());
     };

@@ -56,6 +56,7 @@ app
   .use(store)
   .use(router)
   .use(VueCountTo)
+  .use(echarts)
   .component("icon", icon) // 全局引用icon组件
   .mount("#app");
 

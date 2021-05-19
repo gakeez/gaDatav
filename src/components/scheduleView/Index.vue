@@ -13,17 +13,17 @@ import { getCurrentInstance } from "vue";
 export default {
   name: "ScheduleView",
   mounted() {
-    const { ctx } = getCurrentInstance();
+    const { proxy } = getCurrentInstance();
 
     function getVirtualData(year) {
       year = year || "2020";
-      const date = +ctx.echarts.number.parseDate(year + "-06-01");
-      const end = +ctx.echarts.number.parseDate(+year + 1 + "-12-31");
+      const date = +proxy.echarts.number.parseDate(year + "-06-01");
+      const end = +proxy.echarts.number.parseDate(+year + 1 + "-12-31");
       const dayTime = 3600 * 24 * 1000;
       const data = [];
       for (let time = date; time < end; time += dayTime) {
         data.push([
-          ctx.echarts.format.formatTime("yyyy-MM-dd", time), // 格式化时间
+          proxy.echarts.format.formatTime("yyyy-MM-dd", time), // 格式化时间
           Math.floor(Math.random() * 10000),
         ]);
       }
@@ -111,7 +111,7 @@ export default {
     };
 
     if (!this.chart) {
-      this.chart = ctx.echarts.init(
+      this.chart = proxy.echarts.init(
         document.getElementById("schedule-view-chart")
       );
     }

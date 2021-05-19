@@ -33,7 +33,7 @@ export default {
     let chart;
     let task;
     let currentChart = 0;
-    const { ctx } = getCurrentInstance();
+    const { proxy } = getCurrentInstance();
     const update = () => {
       function createOption() {
         const sourceData = [];
@@ -113,7 +113,9 @@ export default {
         };
       }
       if (!chart) {
-        chart = ctx.echarts.init(document.getElementById("hot-category-chart"));
+        chart = proxy.echarts.init(
+          document.getElementById("hot-category-chart")
+        );
       }
       chart.setOption(createOption());
       currentChart === 0 ? (currentChart = 1) : (currentChart = 0);

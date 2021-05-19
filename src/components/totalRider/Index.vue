@@ -27,7 +27,7 @@ export default {
     let task;
     let currentChart = 0;
     const colors = ["#467bdb", "#6a5acd"];
-    const { ctx } = getCurrentInstance();
+    const { proxy } = getCurrentInstance();
 
     const update = () => {
       function createOption() {
@@ -139,7 +139,9 @@ export default {
       }
 
       if (!chart) {
-        chart = ctx.echarts.init(document.getElementById("average-age-chart2"));
+        chart = proxy.echarts.init(
+          document.getElementById("average-age-chart2")
+        );
       }
       chart.setOption(createOption());
       if (currentChart === 0) {

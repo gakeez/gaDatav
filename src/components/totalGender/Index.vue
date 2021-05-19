@@ -50,7 +50,7 @@ export default {
     const endMale = ref(0);
     const startFemale = ref(0);
     const endFemale = ref(0);
-    const { ctx } = getCurrentInstance();
+    const { proxy } = getCurrentInstance();
 
     const updateChart = () => {
       function createOption() {
@@ -85,7 +85,9 @@ export default {
       }
 
       if (!chart) {
-        chart = ctx.echarts.init(document.getElementById("total-gender-chart"));
+        chart = proxy.echarts.init(
+          document.getElementById("total-gender-chart")
+        );
       }
       chart.setOption(createOption());
     };

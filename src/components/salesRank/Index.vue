@@ -50,7 +50,7 @@ export default {
     data: Array,
   },
   setup(props) {
-    const { ctx } = getCurrentInstance();
+    const { proxy } = getCurrentInstance();
     const headerData = ref([]);
     const listData = ref([]);
     let currentIndex = 0;
@@ -125,7 +125,7 @@ export default {
         const chart = [];
         headerData.value.forEach((item, index) => {
           const id = `activate-user-chart${index + 1}`;
-          chart[index] = ctx.echarts.init(document.getElementById(id));
+          chart[index] = proxy.echarts.init(document.getElementById(id));
           chart[index].setOption(createOption());
         });
 

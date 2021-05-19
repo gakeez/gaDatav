@@ -42,7 +42,7 @@ export default {
     data: Object,
   },
   setup(props) {
-    const { ctx } = getCurrentInstance();
+    const { proxy } = getCurrentInstance();
     let chart;
     const update = () => {
       //console.log(props.data.data);
@@ -127,7 +127,7 @@ export default {
               itemStyle: {
                 // graphic 图形相关帮助方法。
                 // LinearGradient 渐变内置生成器
-                color: new ctx.echarts.graphic.LinearGradient(0, 0, 0, 1, [
+                color: new proxy.echarts.graphic.LinearGradient(0, 0, 0, 1, [
                   {
                     offset: 0,
                     color: "#99CCFF",
@@ -155,7 +155,7 @@ export default {
         return option;
       }
       if (!chart) {
-        chart = ctx.echarts.init(
+        chart = proxy.echarts.init(
           document.getElementById("real-time-order-chart")
         );
       }

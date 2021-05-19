@@ -39,6 +39,7 @@
 </template>
 <script>
 import { ref, watch, onMounted, getCurrentInstance } from "vue";
+// import * as echarts from "echarts";
 
 export default {
   name: "averageAge",
@@ -46,6 +47,7 @@ export default {
     data: Array,
     avgAge: Number,
   },
+
   setup(props) {
     /* eslint-disable */
     const startAge = ref(0);
@@ -60,7 +62,7 @@ export default {
       color.push(item.color);
       axis.push(item.axis);
     });
-    const { ctx } = getCurrentInstance();
+    const { proxy } = getCurrentInstance();
 
     const updateChart = () => {
       function createOption() {
@@ -119,7 +121,7 @@ export default {
         };
       }
       if (!myChart) {
-        myChart = ctx.echarts.init(
+        myChart = proxy.echarts.init(
           document.getElementById("average-age-chart")
         );
       }
@@ -142,8 +144,8 @@ export default {
         startAge.value = prevValue;
       }
     );
-    /* 更新图表数据 */
 
+    /* 更新图表数据 */
     watch(
       () => props.data,
       (newData) => {

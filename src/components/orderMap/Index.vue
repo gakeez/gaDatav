@@ -15,7 +15,7 @@ export default {
     data: null,
   },
   setup(props) {
-    const { ctx } = getCurrentInstance();
+    const { proxy } = getCurrentInstance();
     let chart;
     const options = ref({});
 
@@ -356,7 +356,7 @@ export default {
       }
 
       // 注册地图
-      ctx.echarts.registerMap("china", geoJson);
+      proxy.echarts.registerMap("china", geoJson);
 
       // 生成散点图数据
       const convertData = function(data) {
@@ -759,7 +759,7 @@ export default {
         });
       }
       if (!chart) {
-        chart = ctx.echarts.init(document.getElementById("order-map-chart"));
+        chart = proxy.echarts.init(document.getElementById("order-map-chart"));
       }
       chart.setOption(optionXyMap01);
     };
